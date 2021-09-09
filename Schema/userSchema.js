@@ -20,8 +20,7 @@ const userSchema = new Schema({
         required: true,
     },
     profileImg: {
-        type: String,
-        default: ''
+        type: Object,
     },
     joiningDate: {
         type: Date,
@@ -32,8 +31,12 @@ const userSchema = new Schema({
         default: 0,
     },
     followers: {
-        type: Number,
-        default: 0,
+        type: Array,
+        default: [],
+    },
+    following: {
+        type: Array,
+        default: [],
     },
     social: {
         type: Object,
