@@ -20,7 +20,8 @@ const userSchema = new Schema({
         required: true,
     },
     profileImg: {
-        type: Object,
+        type: String,
+        default: '',
     },
     joiningDate: {
         type: Date,
@@ -44,6 +45,10 @@ const userSchema = new Schema({
             fbLink: '',
             igLink: '',
         }
+    },
+    verified: {
+        type: Boolean,
+        default: false,
     }
 })
 

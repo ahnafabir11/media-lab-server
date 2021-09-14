@@ -6,7 +6,7 @@ const postSchema = new Schema({
     required: true,
   },
   postImg: {
-    type: Object,
+    type: String,
     required: true,
   },
   uploadDate: {
