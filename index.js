@@ -141,9 +141,9 @@ app.post("/api/updateProfile", async (req, res) => {
 app.post("/api/createPost", async (req, res) => {
   const email = req.body.email;
   const postImg = req.body.postImg
-
+  const public_id = req.body.public_id
   try {
-    const newPost = new PostModel({ email, postImg })
+    const newPost = new PostModel({ email, postImg, public_id })
     const savedPost = await newPost.save()
     res.status(201).send(savedPost)
   } catch (error) {
@@ -159,6 +159,10 @@ app.get("/api/allPosts", async (req, res) => {
     res.status(400).send(error)
   }
 })
+
+// app.post("/api/deletePost", async (req, res) => {
+//   const public_id = req.body.public
+// })
 
 app.post("/api/likePost", async (req, res) => {
   const likedPostId = req.body.likedPost
