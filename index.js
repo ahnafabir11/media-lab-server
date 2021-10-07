@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const fileUpload = require("express-fileupload")
 const UserModel = require("./Schema/userSchema")
 const PostModel = require("./Schema/postSchema")
+const cloudinary = require("./utils/cloudinary")
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -160,9 +161,18 @@ app.get("/api/allPosts", async (req, res) => {
   }
 })
 
-// app.post("/api/deletePost", async (req, res) => {
-//   const public_id = req.body.public
-// })
+app.post("/api/deletePost", async (req, res) => {
+  const postId = req.body.postId
+  const public_id = req.body.public_id
+
+  try {
+    await cloudinary.uploader.destroy(public_id)
+    const allPosts = await PostModel.findByIdAndDelete(postId)
+    res.status(200).send(allPosts)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
 
 app.post("/api/likePost", async (req, res) => {
   const likedPostId = req.body.likedPost
