@@ -10,7 +10,13 @@ const cloudinary = require("./utils/cloudinary")
 const app = express()
 const port = process.env.PORT || 5000
 
-app.use(cors())
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://media-lab-ee257.web.app');
+  // You can also specify other CORS headers as needed
+  // res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  // res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+})
 app.use(fileUpload())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
